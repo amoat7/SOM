@@ -1,6 +1,6 @@
 # The repo address for the docker image in artifact registry
 # replace with your own repo
-IMAGE=us-central1-docker.pkg.dev/proven-script-347020/som-repo/som:latest
+IMAGE=us-central1-docker.pkg.dev/proven-script-347020/kohonen:latest
 
 # run self organising map
 build:
