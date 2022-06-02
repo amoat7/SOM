@@ -153,13 +153,10 @@ class Som:
         axes[4].imshow((som*255).astype(np.uint8))
         axes[4].title.set_text('Epochs = ' + str(epoch+1))
 
+        # return plot of som as a streaming response
         image = BytesIO()
         plt.savefig(image, format="JPEG")
         image.seek(0)
         return StreamingResponse(image, media_type="image/jpg")
-
-        #plt.savefig(
-        #    f'som_plots/SOM_{self.map_size}x{self.map_size}_{self.max_epochs}_epochs.png', bbox_inches='tight')
-        
 
 

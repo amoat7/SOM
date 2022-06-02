@@ -26,5 +26,5 @@ def kohonen(params: Items):
 
     my_som = Som(input_data=training_data, max_epochs=max_epochs,
              map_size=map_size, learning_rate=learning_rate)
-    a = my_som.train_som()
-    return a 
+    response = my_som.train_som()
+    return response 

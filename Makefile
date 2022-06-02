@@ -17,4 +17,23 @@ run_som:
 		-it --rm \
 		-p 80:80 \
 		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
+		--network=host \
 		"$(IMAGE)" > logs/local_pipeline.log
+
+test_som_local:
+	docker run \
+		-it --rm \
+		--entrypoint python \
+		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
+		--network=host \
+		"$(IMAGE)"\
+		/som_plots/test_som_local.py > logs/local_pipeline.log
+
+test_som_gcp:
+	docker run \
+		-it --rm \
+		--entrypoint python \
+		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
+		"$(IMAGE)"\
+		/som_plots/test_som_local.py > logs/local_pipeline.log
+
