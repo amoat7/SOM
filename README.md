@@ -1,2 +1,2 @@
 # SOM
-Numpy implementation of self organising map 
+Basic numpy implementation of self organising map 
