@@ -1,5 +1,5 @@
 ---
-name: Build and push image to GCP
+name: Build, push image to GCP and deploy to cloud run
 on:
   push:
     branches: [ master ]
@@ -50,8 +50,8 @@ jobs:
     
     - name: Deploy
       run: |
-        gcloud run deploy kohonen --image us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME --region us-central1\
-        --platform managed \
+        gcloud run deploy kohonen --image=us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME --region=us-central1 \
+        --platform=managed \
         --allow-unauthenticated \
         --memory 1G
 
