@@ -9,7 +9,7 @@ Unlike other learning technique in neural networks, training a SOM requires no t
 <img src="http://www.pitt.edu/~is2470pb/Spring05/FinalProjects/Group1a/tutorial/kohonen1.gif" />
 
 ## Project Description
-This project contains a basic implementation of a kohonen self oraginsing map written in python using the numpy library and written using PEP8 standards. This library can be tested by running the Dockerfile  and sending required aparameters as a post request. This plot of the SOM at different iterations will be returned as a response and stored locally. A running instance of the Dockerfile has been deployed on GCP and instructions on how to use it has been outlined below. A continuous deployment workflow using github actions has also been included. 
+This project contains a basic implementation of a kohonen self organising map written in python using the numpy library and written using PEP8 standards. This library can be tested by running the Dockerfile  and sending required parameters as a post request. This plot of the SOM at different iterations will be returned as a response and stored locally. A running instance of the Dockerfile has been deployed on GCP and instructions on how to use it has been outlined below. A continuous deployment workflow using github actions has also been included. 
 
 ## Some  outputs generated using the SOM library
 - A 10x10 network trained for 500 iterations using 10 colours as input data. It takes about 4.7 seconds to train this network.
@@ -43,10 +43,11 @@ This project contains a basic implementation of a kohonen self oraginsing map wr
 
 - Run `make build` to build docker image
 
-- Run `make run_som` to run local insatnce of built docker image. This exposes an andpoint that accepts requests.
+- Run `make run_som` to run local instance of built docker image. This exposes an endpoint that accepts requests.
 
-- Run `make test_som_local` to check the performance of the SOM algorithm. Running this trains the network and returns a  `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be changed by changing desired parameters in `test_som_local.py` located in  `som_plots`. 
+- Run `make test_som_local` to check the performance of the SOM algorithm. Running this trains the network and returns a  `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `test_som_local.py` located in  `som_plots`. 
 Parameters in `test_som_local.py` are specified as a dictionary as shown below. 
+
 ```
 payload = {
     "input_data":training_data,
@@ -62,9 +63,9 @@ After changing parameters in `test_som_local.py`, run `make test_som_local` to g
 
 - Clone this repo. 
 
-- [Optional] Run `make build` to build docker image. Atifact registry image has been made public and will be pulled when you run `make test_som_gcp`.
+- [Optional] Run `make build` to build docker image. Artifact registry image has been made public and will be pulled when you run `make test_som_gcp`.
 
-- Run `make test_som_gcp` to check the performance of the SOM algorithm. Running this trains the network online and returns a `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as i nput data and map size can be changed by changing desired parameters in `test_som_gcp.py` located in  `som_plots`. Parameters in `test_som_gcp.py` are specified as a dictionary as shown below. 
+- Run `make test_som_gcp` to check the performance of the SOM algorithm. Running this trains the network online and returns a `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `test_som_gcp.py` located in  `som_plots`. Parameters in `test_som_gcp.py` are specified as a dictionary as shown below. 
 ```
 payload = {
     "input_data":training_data,
