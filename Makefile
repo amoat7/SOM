@@ -1,6 +1,6 @@
 # The repo address for the docker image in artifact registry
 # replace with your own repo
-IMAGE=us-central1-docker.pkg.dev/proven-script-347020/kohonen:latest
+IMAGE=us-central1-docker.pkg.dev/proven-script-347020/kohonen/kohonen:latest
 
 # run self organising map
 build:
@@ -35,5 +35,5 @@ test_som_gcp:
 		--entrypoint python \
 		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
 		"$(IMAGE)"\
-		/som_plots/test_som_local.py > logs/local_pipeline.log
+		/som_plots/test_som_gcp.py > logs/local_pipeline.log
 

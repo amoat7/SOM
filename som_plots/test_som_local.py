@@ -18,6 +18,6 @@ payload = {
 }
 
 session = requests.Session()
-with session.post("http://0.0.0.0:80/kohonen", json=payload, stream=True) as sess:
+with session.post("http://0.0.0.0:8080/kohonen", json=payload, stream=True) as sess:
     with open('/som_plots/som.png', 'wb') as file_:
         shutil.copyfileobj(sess.raw, file_)
