@@ -4,10 +4,11 @@ Script to implement Kohonen self organising map using numpy
 Author: David Amoateng
 Date: 03-06-22
 """
-import numpy as np
-import matplotlib.pyplot as plt
 from io import BytesIO
 from fastapi.responses import StreamingResponse
+import numpy as np
+import matplotlib.pyplot as plt
+
 
 
 class Som:
@@ -113,11 +114,11 @@ class Som:
         input:
             None
         output:
-            None
+            Streaming response
         """
 
         # matplotlib axes to plot SOM network updates
-        Fig, axes = plt.subplots(
+        _, axes = plt.subplots(
             nrows=1, ncols=5, figsize=(20, 5))
 
         # plot randomly initialised self organising map
@@ -158,5 +159,3 @@ class Som:
         plt.savefig(image, format="JPEG")
         image.seek(0)
         return StreamingResponse(image, media_type="image/jpg")
-
-

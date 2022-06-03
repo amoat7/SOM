@@ -1,23 +1,33 @@
-import requests
-import numpy as np 
+"""
+Script to test local deployment of SOM
+
+Author: David Amoateng
+Date: 03-06-22
+"""
 import json
 import shutil
+import time
+import requests
+import numpy as np
 
-
+start = time.time()
 training_data = np.random.rand(10, 3)
 training_data = json.dumps(training_data.tolist())
-max_epochs = 500
-map_size = 10
-learning_rate = 0.1
+MAX_EPOCHS = 100
+MAP_SIZE = 10
+LEARNING_RATE = 0.1
 
 payload = {
-    "input_data":training_data,
-    "max_epochs": max_epochs,
-    "map_size": map_size,
-    "learning_rate": learning_rate
+    "input_data": training_data,
+    "max_epochs": MAX_EPOCHS,
+    "map_size": MAP_SIZE,
+    "learning_rate": LEARNING_RATE
 }
 
 session = requests.Session()
 with session.post("http://0.0.0.0:8080/kohonen", json=payload, stream=True) as sess:
     with open('/som_plots/som.png', 'wb') as file_:
         shutil.copyfileobj(sess.raw, file_)
+end = time.time()
+total_time = end - start
+print(f"Total time - {total_time} seconds")

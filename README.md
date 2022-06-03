@@ -12,20 +12,20 @@ Unlike other learning technique in neural networks, training a SOM requires no t
 This project contains a basic implementation of a kohonen self oraginsing map written in python using the numpy library and written using PEP8 standards. This library can be tested by running the Dockerfile  and sending required aparameters as a post request. This plot of the SOM at different iterations will be returned as a response and stored locally. A running instance of the Dockerfile has been deployed on GCP and instructions on how to use it has been outlined below. A continuous development workflow using github actions has also been included. 
 
 ## Some  outputs generated using the SOM library
-- A 10x10 network trained for 500 iterations using 10 colours as input data
+- A 10x10 network trained for 500 iterations using 10 colours as input data. It takes about 4.7 seconds to train this network.
 
-![10x10_500](examples/10x100_100.png)
+![10x10_500](examples/10x10_500.png)
 
-- A 100x100 network trained for 1000 iterations using 10 colours as input data
+- A 100x100 network trained for 1000 iterations using 10 colours as input data. It takes 786.4 seconds to train this network.
 
-![10x10_500](examples/10x100_100.png)
+![10x10_500](examples/100x100_1000.png)
 
 
 
 ## Files and folders in this repo
 - `/.github/` folder: Contains github actions workflow. This workflow builds the docker image, pushes it to GCP artifact registry and container registry and then deploys the image on GCP cloud run. 
 
-- `/logs/` folder: Contains output logs of locally running docker containers. 
+- `/logs/` folder: Contains output logs of locally running docker containers. The running time of the som training is also reported here. 
 
 - `/som_plots/` folder: Contains output plots generated and python files on how to use the SOM library. 
 

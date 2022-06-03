@@ -1,23 +1,38 @@
-from typing import Optional 
+"""
+Script to use som library
 
-from fastapi import FastAPI, Path
-from typing import List
+Author: David Amoateng
+Date: 03-06-22
+"""
+import json
+from typing import Optional
+import numpy as np
+from fastapi import FastAPI
 from pydantic import BaseModel
 from som_library import Som
-import numpy as np 
-import json
+
 
 class Items(BaseModel):
+    '''
+    parameter definitions
+    '''
     input_data: str
     max_epochs: Optional[int] = 100
     map_size: Optional[int] = 10
     learning_rate: Optional[float] = 0.1
 
+
 app = FastAPI()
+
 
 @app.post("/kohonen")
 def kohonen(params: Items):
-    
+    '''
+    post request function
+
+    returns Streaming response
+    '''
+
     training_data = params.input_data
     max_epochs = params.max_epochs
     map_size = params.map_size
@@ -25,6 +40,6 @@ def kohonen(params: Items):
     training_data = np.asarray(json.loads(training_data))
 
     my_som = Som(input_data=training_data, max_epochs=max_epochs,
-             map_size=map_size, learning_rate=learning_rate)
+                 map_size=map_size, learning_rate=learning_rate)
     response = my_som.train_som()
-    return response 
+    return response
