@@ -9,7 +9,7 @@ Unlike other learning technique in neural networks, training a SOM requires no t
 <img src="http://www.pitt.edu/~is2470pb/Spring05/FinalProjects/Group1a/tutorial/kohonen1.gif" />
 
 ## Project Description
-This project contains a basic implementation of a kohonen self organising map written in python using the numpy library and written using PEP8 standards. This library can be tested by running the Dockerfile  and sending required parameters as a post request. This plot of the SOM at different iterations will be returned as a response and stored locally. A running instance of the Dockerfile has been deployed on GCP and instructions on how to use it has been outlined below. A continuous deployment workflow using github actions has also been included. 
+This project contains a basic implementation of a kohonen self organising map written in python using the numpy library and written using PEP8 standards. This library can be used by running the Dockerfile  and sending required parameters as a post request. This plot of the SOM at different iterations will be returned as a response and stored locally. A running instance of the Dockerfile has been deployed on GCP and instructions on how to use it has been outlined below. A continuous deployment workflow using github actions has also been included. 
 
 ## Some  outputs generated using the SOM library
 - A 10x10 network trained for 500 iterations using 10 colours as input data. It takes about 4.7 seconds to train this network.
@@ -29,7 +29,7 @@ This project contains a basic implementation of a kohonen self organising map wr
 
 - `/som_plots/` folder: Contains output plots generated and python files on how to use the SOM library. 
 
-- `Makefile`: Contains commands for building and running docker images locally. Also contains commands used to test local and cloud deployment. 
+- `Makefile`: Contains commands for building and running docker images locally. Also contains commands used to use local and cloud deployment. 
 
 - `main.py`: main file run by uvicorn server to expose endpoint. 
 
@@ -45,8 +45,8 @@ This project contains a basic implementation of a kohonen self organising map wr
 
 - Run `make run_som` to run local instance of built docker image. This exposes an endpoint that accepts requests.
 
-- Run `make test_som_local` to check the performance of the SOM algorithm. Running this trains the network and returns a  `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `test_som_local.py` located in  `som_plots`. 
-Parameters in `test_som_local.py` are specified as a dictionary as shown below. 
+- Run `make use_som_local` to check the performance of the SOM algorithm. Running this trains the network and returns a  `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `use_som_local.py` located in  `som_plots`. 
+Parameters in `use_som_local.py` are specified as a dictionary as shown below. 
 
 ```
 payload = {
@@ -56,16 +56,16 @@ payload = {
     "learning_rate": learning_rate
 }
 ```
-After changing parameters in `test_som_local.py`, run `make test_som_local` to get new plot file. 
+After changing parameters in `use_som_local.py`, run `make use_som_local` to get new plot file. 
 
 
 ## How to use endpoint deployed on GCP cloud run 
 
 - Clone this repo. 
 
-- [Optional] Run `make build` to build docker image. Artifact registry image has been made public and will be pulled when you run `make test_som_gcp`.
+- [Optional] Run `make build` to build docker image. Artifact registry image has been made public and will be pulled when you run `make use_som_gcp`.
 
-- Run `make test_som_gcp` to check the performance of the SOM algorithm. Running this trains the network online and returns a `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `test_som_gcp.py` located in  `som_plots`. Parameters in `test_som_gcp.py` are specified as a dictionary as shown below. 
+- Run `make use_som_gcp` to check the performance of the SOM algorithm. Running this trains the network online and returns a `som.png` file as a response which will be stored in `som_plots` folder. Input parameters to the kohonen map  such as input data and map size can be set by changing desired parameters in `use_som_gcp.py` located in  `som_plots`. Parameters in `use_som_gcp.py` are specified as a dictionary as shown below. 
 ```
 payload = {
     "input_data":training_data,
@@ -75,5 +75,5 @@ payload = {
 }
 ```
 
- After changing parameters in `test_som_gcp.py`, run `make test_som_gcp` to get new plot file. 
+ After changing parameters in `use_som_gcp.py`, run `make use_som_gcp` to get new plot file. 
 
