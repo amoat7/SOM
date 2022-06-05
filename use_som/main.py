@@ -20,6 +20,7 @@ class Items(BaseModel):
     max_epochs: Optional[int] = 100
     map_size: Optional[int] = 10
     learning_rate: Optional[float] = 0.1
+    local: Optional[bool] = False
 
 
 app = FastAPI()
@@ -38,8 +39,9 @@ def kohonen(params: Items):
     map_size = params.map_size
     learning_rate = params.learning_rate
     training_data = np.asarray(json.loads(training_data))
+    local = params.locals
 
     my_som = Som(input_data=training_data, max_epochs=max_epochs,
-                 map_size=map_size, learning_rate=learning_rate)
+                 map_size=map_size, learning_rate=learning_rate, local=local)
     response = my_som.train_som()
     return response
