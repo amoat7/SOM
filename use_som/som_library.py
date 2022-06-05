@@ -160,7 +160,7 @@ class Som:
         axes[4].title.set_text('Epochs = ' + str(epoch+1))
 
         if self.local:
-            plt.savefig(f"som_plots/som_{int(time.time())}.png")
+            plt.savefig(f"som_plots/som_{int(time.time())}.jpg")
         else:
             # return plot of som as a streaming response
             image = BytesIO()

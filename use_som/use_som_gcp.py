@@ -14,8 +14,8 @@ start = time.time()
 
 training_data = np.random.rand(10, 3)
 training_data = json.dumps(training_data.tolist())
-MAX_EPOCHS = 100
-MAP_SIZE = 10
+MAX_EPOCHS = 300
+MAP_SIZE = 30
 LEARNING_RATE = 0.1
 LOCAL = False
 
