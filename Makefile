@@ -29,5 +29,5 @@ use_som_gcp:
 		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
 		--volume "$(shell pwd)/use_som:/use_som:rw" \
 		"$(IMAGE)"\
-		/som_plots/use_som_gcp.py > logs/gcp.log
+		/use_som/use_som_gcp.py > logs/gcp.log
 
