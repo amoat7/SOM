@@ -1,5 +1,5 @@
 """
-Script to test local deployment of SOM
+Script to test cloud deployment of SOM
 
 Author: David Amoateng
 Date: 03-06-22
@@ -11,6 +11,7 @@ import requests
 import numpy as np
 
 start = time.time()
+
 training_data = np.random.rand(10, 3)
 training_data = json.dumps(training_data.tolist())
 MAX_EPOCHS = 100
@@ -24,9 +25,11 @@ payload = {
     "learning_rate": LEARNING_RATE
 }
 
+
 session = requests.Session()
-with session.post("http://0.0.0.0:8080/kohonen", json=payload, stream=True) as sess:
-    with open('/som_plots/som.png', 'wb') as file_:
+with session.post("https://kohonen-ermg44f2xa-uc.a.run.app/kohonen",
+                  json=payload, stream=True) as sess:
+    with open(f'som_plots/som_{int(time.time())}.png', 'wb') as file_:
         shutil.copyfileobj(sess.raw, file_)
 end = time.time()
 total_time = end - start

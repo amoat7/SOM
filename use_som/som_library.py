@@ -8,6 +8,7 @@ from io import BytesIO
 from fastapi.responses import StreamingResponse
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 
 
@@ -20,7 +21,8 @@ class Som:
                  input_data: np.ndarray,
                  max_epochs: int = 50,
                  map_size: int = 10,
-                 learning_rate: int = 0.1) -> None:
+                 learning_rate: int = 0.1,
+                 local: bool = True) -> None:
         """
         Parameters
         ----------
@@ -32,11 +34,14 @@ class Som:
             Size of kohonen network. Assumes a square shape
         learning_rate: int, optional
             Initial learning rate for upadting SOM
+        local: bool, optional
+            Specifies whether library is used for local or cloud deployment
         """
         self.input_data = input_data
         self.max_epochs = max_epochs
         self.map_size = map_size
         self.learning_rate = learning_rate
+        self.local = local
         # initialise SOM
         self.intial_som = np.random.rand(
             self.map_size, self.map_size, self.input_data.shape[1])
@@ -154,8 +159,11 @@ class Som:
         axes[4].imshow((som*255).astype(np.uint8))
         axes[4].title.set_text('Epochs = ' + str(epoch+1))
 
-        # return plot of som as a streaming response
-        image = BytesIO()
-        plt.savefig(image, format="JPEG")
-        image.seek(0)
-        return StreamingResponse(image, media_type="image/jpg")
+        if self.local:
+            plt.savefig(f"som_plots/som_{int(time.time())}.png")
+        else:
+            # return plot of som as a streaming response
+            image = BytesIO()
+            plt.savefig(image, format="JPEG")
+            image.seek(0)
+            return StreamingResponse(image, media_type="image/jpg")

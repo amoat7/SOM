@@ -12,28 +12,22 @@ push:
 pull:
 	docker pull "$(IMAGE)"
 
-run_som:
-	docker run \
-		-it --rm \
-		-p 80:80 \
-		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
-		--network=host \
-		"$(IMAGE)" > logs/run_som.log
 
 use_som_local:
 	docker run \
 		-it --rm \
 		--entrypoint python \
 		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
-		--network=host \
+		--volume "$(shell pwd)/use_som:/use_som:rw" \
 		"$(IMAGE)"\
-		/som_plots/use_som_local.py > logs/local.log
+		/use_som/use_som_local.py > logs/local.log
 
 use_som_gcp:
 	docker run \
 		-it --rm \
 		--entrypoint python \
 		--volume "$(shell pwd)/som_plots:/som_plots:rw" \
+		--volume "$(shell pwd)/use_som:/use_som:rw" \
 		"$(IMAGE)"\
 		/som_plots/use_som_gcp.py > logs/gcp.log
 
