@@ -39,7 +39,7 @@ def kohonen(params: Items):
     map_size = params.map_size
     learning_rate = params.learning_rate
     training_data = np.asarray(json.loads(training_data))
-    local = params.locals
+    local = params.local
 
     my_som = Som(input_data=training_data, max_epochs=max_epochs,
                  map_size=map_size, learning_rate=learning_rate, local=local)
